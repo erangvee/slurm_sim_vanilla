@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Slurm Workload Manager</title>
+
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	<link rel="stylesheet" type="text/css" href="fonts.css" />
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="slurm.css" />
+
+	<script type="text/javascript">
+	(function() {
+	  var cx = '011890816164765777536:jvrtxrd3f0w';
+	  var gcse = document.createElement('script');
+	  gcse.type = 'text/javascript';
+	  gcse.async = true;
+	  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	  var s = document.getElementsByTagName('script')[0];
+	  s.parentNode.insertBefore(gcse, s);
+	})();
+	</script>
+</head>
+
+<body>
+
+<div class="container container--main">
+
+	<header class="site-header" role="banner">
+
+		<div class="site-masthead">
+			<h1 class="site-masthead__title site-masthead__title--slurm">
+				<a href="/slurm" rel="home">
+					<span class="slurm-logo">Slurm Workload Manager</span>
+				</a>
+			</h1>
+			<div class="site-masthead__title">
+				<a href="https://www.schedmd.com/" rel="home">
+					<span class="site-logo">SchedMD</span>
+				</a>
+			</div>
+
+			<button class="site-masthead__trigger menu-trigger" type="button" role="button" aria-label="Toggle Navigation"><span class="menu-trigger__lines"></span></button>
+		</div>
+
+
+		<nav class="site-nav">
+			<h2 class="site-nav__title">Navigation</h2>
+
+			<div class="slurm-title">
+				<div class="slurm-logo"><a href="/slurm">Slurm Workload Manager</a></div>
+				<div class="slurm-title__version">Version 17.02</div>
+			</div>
+
+			<ul class="site-nav__menu site-menu menu" role="navigation">
+				<li class="site-menu__item">
+				        <div>About</div>
+					<ul>
+						<li><a href="overview.html">Overview</a></li>
+						<li><a href="news.html">What's New</a></li>
+						<li><a href="team.html">Slurm Team</a></li>
+						<li><a href="meetings.html">Meetings</a></li>
+						<li><a href="testimonials.html">Testimonials</a></li>
+						<li><a href="disclaimer.html">Legal Notices</a></li>
+					</ul>
+				</li>
+				<li class="site-menu__item">
+					<div>Using</div>
+					<ul>
+						<li><a href="tutorials.html">Tutorials</a></li>
+						<li><a href="documentation.html">Documentation</a></li>
+						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="publications.html">Publications</a></li>
+					</ul>
+				</li>
+				<li class="site-menu__item">
+					<div>Installing</div>
+					<ul>
+						<li><a href="download.html">Download</a></li>
+						<li><a href="quickstart_admin.html">Installation Guide</a></li>
+					</ul>
+				</li>
+				<li class="site-menu__item">
+					<div>Getting Help</div>
+					<ul>
+						<li><a href="https://www.schedmd.com/services.php">Support</a></li>
+						<li><a href="mail.html">Mailing Lists</a></li>
+						<li><a href="https://www.schedmd.com/services.php">Training</a></li>
+						<li><a href="troubleshoot.html">Troubleshooting</a></li>
+					</ul>
+				</li>
+			</ul>
+
+		</nav>
+
+	</header>
+
+	<div class="content" role="main">
+		<section class="slurm-search">
+			<div class="container" id="cse">
+				<gcse:search></gcse:search>
+			</div>
+		</section>
+
+		<div class="section">
+			<div class="container">
+
+<H1>gres.conf</H1>
+Section: Slurm Configuration File (5)<BR>Updated: Slurm Configuration File<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<a id="SECTION_NAME"></a>
+<H2>NAME</H2>
+
+gres.conf - Slurm configuration file for generic resource management.
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<a id="SECTION_DESCRIPTION"></a>
+<H2>DESCRIPTION</H2>
+
+<B>gres.conf</B> is an ASCII file which describes the configuration
+of generic resources on each compute node. Each node must contain a
+gres.conf file if generic resources are to be scheduled by Slurm.
+The file location can be modified at system build time using the
+DEFAULT_SLURM_CONF parameter or at execution time by setting the SLURM_CONF
+environment variable. The file will always be located in the
+same directory as the <B>slurm.conf</B> file. If generic resource counts are
+set by the gres plugin function node_config_load(), this file may be optional.
+<P>
+
+Parameter names are case insensitive.
+Any text following a &quot;#&quot; in the configuration file is treated
+as a comment through the end of that line.
+Changes to the configuration file take effect upon restart of
+Slurm daemons, daemon receipt of the SIGHUP signal, or execution
+of the command &quot;scontrol reconfigure&quot; unless otherwise noted.
+<P>
+
+The overall configuration parameters available include:
+<P>
+<DL COMPACT>
+<a id="OPT_Count"></a>
+<DT><B>Count</B><DD>
+Number of resources of this type available on this node.
+The default value is set to the number of <B>File</B> values specified (if any),
+otherwise the default value is one. A suffix of &quot;K&quot;, &quot;M&quot;, &quot;G&quot;, &quot;T&quot; or &quot;P&quot; may be
+used to multiply the number by 1024, 1048576, 1073741824, etc. respectively.
+<P>
+<a id="OPT_CPUs"></a>
+<DT><B>CPUs</B><DD>
+Specify the CPU index numbers for the specific CPUs which can
+use this resource.
+For example, it may be strongly preferable
+to use specific CPUs with specific devices (e.g. on a NUMA
+architecture). Multiple CPUs may be specified using a comma
+delimited list or a range may be specified using a &quot;-&quot; separator
+(e.g. &quot;0,1,2,3&quot; or &quot;0-3&quot;).
+If specified, then only the identified CPUs can be allocated with each generic
+resource; an attempt to use other CPUs will not be honored.
+If not specified, then any CPU can be used with the resources, which also
+increases the speed of Slurm's scheduling algorithm.
+If any CPU can be effectively used with the resources, then do not specify the
+<B>CPUs</B> option for improved speed in the Slurm scheduling logic.
+<P>
+Since Slurm must be able to perform resource management on heterogeneous
+clusters having various CPU ID numbering schemes, use the Slurm CPU index
+numbers here
+(CPU_ID = Board_ID x threads_per_board +
+Socket_ID x threads_per_socket +
+Core_ID x threads_per_core + Thread_ID).
+<P>
+<a id="OPT_File"></a>
+<DT><B>File</B><DD>
+Fully qualified pathname of the device files associated with a resource. 
+The file name parsing logic includes support for simple regular expressions as
+shown in the example.
+This field is generally required if enforcement of generic resource
+allocations is to be supported (i.e. prevents a users from making
+use of resources allocated to a different user).
+If <B>File</B> is specified then <B>Count</B> must be either set to the number
+of file names specified or not set (the default value is the number of files
+specified).
+Slurm must track the utilization of each individual device If device file
+names are specified, which involves more overhead than just tracking the
+device counts.
+Use the <B>File</B> parameter only if the <B>Count</B> is not sufficient for
+tracking purposes.
+NOTE: If you specify the <B>File</B> parameter for a resource on some node,
+the option must be specified on all nodes and Slurm will track the assignment
+of each specific resource on each node. Otherwise Slurm will only track a
+count of allocated resources rather than the state of each individual device
+file.
+<P>
+<a id="OPT_Name"></a>
+<DT><B>Name</B><DD>
+Name of the generic resource. Any desired name may be used.
+Each generic resource has an optional plugin which can provide
+resource-specific options.
+Generic resources that currently include an optional plugin are:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<a id="OPT_gpu"></a>
+<DT><B>gpu</B><DD>
+Graphics Processing Unit
+<a id="OPT_nic"></a>
+<DT><B>nic</B><DD>
+Network Interface Card
+<a id="OPT_mic"></a>
+<DT><B>mic</B><DD>
+Intel Many Integrated Core (MIC) processor
+</DL>
+</DL>
+
+<P>
+<a id="OPT_NodeName"></a>
+<DT><B>NodeName</B><DD>
+An optional NodeName specification can be used to permit one gres.conf file to
+be used for all compute nodes in a cluster by specifying the node(s) that each
+line should apply to.
+The NodeName specification can use a Slurm hostlist specification as shown in
+the example below.
+<P>
+<a id="OPT_Type"></a>
+<DT><B>Type</B><DD>
+An arbitrary string identifying the type of device.
+For example, a particular model of GPU.
+If <B>Type</B> is specified, then <B>Count</B> is limited in size (currently 1024).
+<P>
+</DL>
+<A NAME="lbAD">&nbsp;</A>
+<a id="SECTION_EXAMPLES"></a>
+<H2>EXAMPLES</H2>
+
+<P>
+
+<BR>
+
+##################################################################
+<BR>
+
+# Slurm's Generic Resource (GRES) configuration file
+<BR>
+
+##################################################################
+<BR>
+
+# Configure support for our four GPUs
+<BR>
+
+Name=gpu Type=gtx560 File=/dev/nvidia0 CPUs=0,1
+<BR>
+
+Name=gpu Type=gtx560 File=/dev/nvidia1 CPUs=0,1
+<BR>
+
+Name=gpu Type=tesla  File=/dev/nvidia2 CPUs=2,3
+<BR>
+
+Name=gpu Type=tesla  File=/dev/nvidia3 CPUs=2,3
+<BR>
+
+Name=bandwidth Count=20M
+<P>
+<P>
+
+<BR>
+
+##################################################################
+<BR>
+
+# Slurm's Generic Resource (GRES) configuration file
+<BR>
+
+# Use a single gres.conf file for all compute nodes
+<BR>
+
+##################################################################
+<BR>
+
+NodeName=tux[0-15]  Name=gpu File=/dev/nvidia[0-3]
+<BR>
+
+NodeName=tux[16-31] Name=gpu File=/dev/nvidia[0-7]
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<a id="SECTION_COPYING"></a>
+<H2>COPYING</H2>
+
+Copyright (C) 2010 The Regents of the University of California.
+Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+<BR>
+
+Copyright (C) 2010-2014 SchedMD LLC.
+<P>
+
+This file is part of Slurm, a resource management program.
+For details, see &lt;<A HREF="https://slurm.schedmd.com/">https://slurm.schedmd.com/</A>&gt;.
+<P>
+
+Slurm is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
+<P>
+
+Slurm is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<a id="SECTION_SEE-ALSO"></a>
+<H2>SEE ALSO</H2>
+
+<P>
+
+<B><A HREF="/man/man2html?5+slurm.conf">slurm.conf</A></B>(5)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAD">EXAMPLES</A><DD>
+<DT><A HREF="#lbAE">COPYING</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 04:00:51 GMT, July 19, 2018
+			</div> <!-- END .container -->
+		</div> <!-- END .section -->
+	</div> <!-- END .content -->
+</div> <!-- END .main -->
+
+<footer class="site-footer" role="contentinfo">
+	<nav class="footer-nav section">
+		<div class="container">
+			<p><a href="disclaimer.html" target="_blank" class="privacy">Legal Notices</a></p>
+		</div>
+	</nav>
+</footer>
+
+<script type='text/javascript'>
+	var custpagename = window.location.href;
+	var urlarray = custpagename.split('#');
+	custpagename = urlarray[1];
+
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			 ga('create', 'UA-47927131-1', 'schedmd.com');
+		ga('send', {'hitType': 'pageview', 'page': custpagename, 'title': custpagename});
+</script>
+
+</body>
+</html>
