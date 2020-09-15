@@ -2,8 +2,10 @@
 
 This repository contains the following:
 * COARE Workload in SWF format
-  * `ASTI-COARE-2018-cln.swf`
-* Slurm simulator incorporated with different corrective policies (base (as-is simulator, as in the [ubccr-slurm-simulator](https://github.com/ubccr-slurm-simulator), power (corrective policy as established by [Tsafrir et al.](https://www.cse.huji.ac.il/~feit/papers/Pred07TPDS.pdf), simple (prediction correction of 1-hour increment)).
+  * `ASTI-COARE-2018-cln.swf` - includes jobs submitted from January 2018 to December 31, 2018
+  * `DOST-COARE-2018-cln-updated.swf` - includes jobs submitted between December 2017 to December 31, 2018.
+  * `DOST-ASTI_COARE-Saliksik-2020-cln` - includes jobs from the COARE's saliksik cluster.
+* Slurm simulator incorporated with different corrective policies (base (as-is simulator, as in the [ubccr-slurm-simulator](https://github.com/ubccr-slurm-simulator)), power (corrective policy as established by [Tsafrir et al.](https://www.cse.huji.ac.il/~feit/papers/Pred07TPDS.pdf)), simple (prediction correction of 1-hour increment)).
 
 ## Configuring the simulator
 The original source code is by Simakov et al. To learn more about how to set it up, please visit [this repository](https://github.com/ubccr-slurm-simulator/slurm_sim_tools). After setting up relevant dependencies, run `configslurmsim.sh` to configure the Slurm simulator.
